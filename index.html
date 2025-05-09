@@ -102,7 +102,7 @@
             background-color: white;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 10px 16px;
+            padding: 12px 18px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -110,6 +110,14 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            margin: 5px;
+            min-width: 150px;
+            user-select: none;
+        }
+
+        .option-btn:active {
+            transform: scale(0.98);
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
         }
 
         .option-btn:hover {
@@ -152,6 +160,42 @@
             background-color: var(--any-color);
             border-color: var(--any-color);
         }
+        
+        .option-btn[data-type="unregistered-tm"].selected {
+            background-color: #DE4326; /* Same as trademarks */
+            border-color: #DE4326;
+            opacity: 0.8; /* Slightly different to indicate unregistered */
+        }
+        
+        .option-btn[data-type="uncertain"].selected {
+            background-color: #A0A0A0;
+            border-color: #A0A0A0;
+        }
+        
+        h3 {
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-align: center;
+        }
+        
+        .infringement-101 {
+            background-color: #F8F9FA;
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--teal);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .infringement-101-link {
+            color: var(--teal);
+            text-decoration: underline;
+            font-weight: 500;
+        }
 
         .option-checkbox {
             position: absolute;
@@ -163,7 +207,7 @@
         .btn-primary {
             background-color: var(--teal);
             color: white;
-            padding: 14px 20px;
+            padding: 16px 24px;
             border-radius: 6px;
             font-weight: 500;
             cursor: pointer;
@@ -172,12 +216,19 @@
             font-size: 18px;
             width: 100%;
             max-width: 400px;
-            margin: 30px auto;
+            margin: 40px auto;
             display: block;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .btn-primary:hover {
             background-color: #4799B5;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        .btn-primary:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
 
         @media (max-width: 768px) {
@@ -203,28 +254,32 @@
     <div class="main-content">
         <div class="container">
             <div class="title-section">
-                <h1>Welcome to the IP Options Finder</h1>
-                <p>This tool can help you identify potential pathways for protecting or enforcing your intellectual property rights in Australia. Based on your selections, you will be provided with a list of options that may be worth considering given your circumstances.</p>
+                <h1>IP First Response</h1>
+                <p><strong>If you suspect that your IP rights have been infringed, this navigator tool (currently in pilot stage) is designed to provide clear and accessible information, giving you the confidence to take the next step.</strong></p>
                 
-                <p>Intellectual property (IP) rights are valuable business assets that can provide competitive advantages. Understanding how to effectively protect and enforce these rights is essential for businesses and creators. While there are many pathways available, finding the right approach for your specific situation can sometimes be challenging.</p>
+                <p>IP First Response asks up to 15 multiple choice questions about your rights, the suspected infringement, and your business situation. Based on your answers, it filters and organises over 30 potential options, highlighting those most likely to be relevant.</p>
                 
-                <p>This tool aims to simplify the process by helping you navigate through various IP protection and enforcement options based on your specific needs and circumstances. From patents and trade marks to design rights and copyright, our goal is to provide you with information about potential strategies that align with your situation.</p>
+                <p>IP First Response provides you with details about the considerations involved with the different pathways you could choose to pursue – but the decision on what best suits your situation remains yours. Please note that IP rights can be complex and nuanced, so there will not be one clear option, but several to consider and maybe even use in combination.</p>
                 
-                <p>Please note that the information provided through this tool is general in nature and does not constitute legal advice. For specific guidance tailored to your individual circumstances, you might want to consult with an IP professional.</p>
+                <p><strong>This tool does not provide professional advice</strong></p>
+                
+                <p>This IP First Response website has been designed to help IP rights holders navigate IP infringement and enforcement by making it visible, accessible, and to provide information about the factors involved in pursuing different options. It does not provide legal, business or other professional advice, and none of the content should be regarded as recommending a specific course of action.</p>
             </div>
 
             <div class="card">
                 <form id="ip-options-form">
                     <div class="option-group">
-                        <h2>Select the IP rights you're interested in:</h2>
+                        <h2>Select the IP rights you're concerned about:</h2>
+                        
+                        <h3>Registered Rights</h3>
                         <div class="options-container">
-                            <label class="option-btn" data-type="patents">
-                                <input type="checkbox" name="ip-rights" value="patents" class="option-checkbox">
-                                Patents
-                            </label>
                             <label class="option-btn" data-type="trademarks">
                                 <input type="checkbox" name="ip-rights" value="trademarks" class="option-checkbox">
                                 Trade marks
+                            </label>
+                            <label class="option-btn" data-type="patents">
+                                <input type="checkbox" name="ip-rights" value="patents" class="option-checkbox">
+                                Patents
                             </label>
                             <label class="option-btn" data-type="designs">
                                 <input type="checkbox" name="ip-rights" value="designs" class="option-checkbox">
@@ -234,37 +289,32 @@
                                 <input type="checkbox" name="ip-rights" value="pbr" class="option-checkbox">
                                 Plant breeder's rights
                             </label>
+                        </div>
+                        
+                        <h3>Other Rights</h3>
+                        <div class="options-container">
                             <label class="option-btn" data-type="copyright">
                                 <input type="checkbox" name="ip-rights" value="copyright" class="option-checkbox">
                                 Copyright
                             </label>
+                            <label class="option-btn" data-type="unregistered-tm">
+                                <input type="checkbox" name="ip-rights" value="unregistered-tm" class="option-checkbox">
+                                Unregistered trade mark
+                            </label>
                             <label class="option-btn" data-type="any">
                                 <input type="checkbox" name="ip-rights" value="any" class="option-checkbox">
-                                Any IP right
+                                Other rights
+                            </label>
+                            <label class="option-btn" data-type="uncertain">
+                                <input type="checkbox" name="ip-rights" value="uncertain" class="option-checkbox">
+                                Uncertain
                             </label>
                         </div>
-                    </div>
+                        
+                        <div id="infringement-101-container" class="infringement-101" style="display: none;">
+                            <p>We recommend you check out our <a href="#" class="infringement-101-link">Infringement 101</a> section before proceeding</p>
+                        </div>
 
-                    <div class="option-group">
-                        <h2>Select your situation:</h2>
-                        <div class="options-container">
-                            <label class="option-btn">
-                                <input type="checkbox" name="situation" value="accused" class="option-checkbox">
-                                I've been accused of infringing
-                            </label>
-                            <label class="option-btn">
-                                <input type="checkbox" name="situation" value="infringed" class="option-checkbox">
-                                I believe my IP has been infringed
-                            </label>
-                            <label class="option-btn">
-                                <input type="checkbox" name="situation" value="proactive" class="option-checkbox">
-                                I'm proactively protecting my IP
-                            </label>
-                            <label class="option-btn">
-                                <input type="checkbox" name="situation" value="support" class="option-checkbox">
-                                I'm seeking support of an IP professional
-                            </label>
-                        </div>
                     </div>
 
                     <button type="button" id="see-options-btn" class="btn-primary">See applicable options</button>
@@ -276,15 +326,48 @@
     <script>
         // Handle option button selection for checkboxes (multi-select)
         document.querySelectorAll('.option-btn').forEach(button => {
-            button.addEventListener('click', function() {
+            // Make the entire button clickable
+            button.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default checkbox behavior
+                
                 // Toggle the selected class on the clicked button
                 this.classList.toggle('selected');
                 
                 // Also toggle the checkbox
                 const checkbox = this.querySelector('.option-checkbox');
                 checkbox.checked = !checkbox.checked;
+                
+                // Check if "Uncertain" is selected
+                checkUncertainSelected();
+            });
+            
+            // Also handle the actual checkbox clicks
+            const checkbox = button.querySelector('.option-checkbox');
+            checkbox.addEventListener('change', function(e) {
+                e.stopPropagation(); // Stop event from bubbling
+                // Toggle the selected class based on checkbox state
+                if (this.checked) {
+                    button.classList.add('selected');
+                } else {
+                    button.classList.remove('selected');
+                }
+                
+                // Check if "Uncertain" is selected
+                checkUncertainSelected();
             });
         });
+        
+        // Function to check if "Uncertain" is selected and show/hide infringement-101
+        function checkUncertainSelected() {
+            const uncertainCheckbox = document.querySelector('input[value="uncertain"]');
+            const infringement101Container = document.getElementById('infringement-101-container');
+            
+            if (uncertainCheckbox && uncertainCheckbox.checked) {
+                infringement101Container.style.display = 'block';
+            } else {
+                infringement101Container.style.display = 'none';
+            }
+        }
 
         // Handle the see options button click
         document.getElementById('see-options-btn').addEventListener('click', function() {
